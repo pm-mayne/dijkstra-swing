@@ -8,9 +8,6 @@ public class Main {
     private final JPanel body;
     private final JPanel leftPanel;
     private final RightPanel rightPanel;
-    private final JTextArea graphTextArea;
-
-
 
     public Main() {
         window = new JFrame("Path Finder");
@@ -18,15 +15,12 @@ public class Main {
 
         body = new JPanel();
 
-        leftPanel = new JPanel();
+        leftPanel = new LeftPanel();
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
 
         rightPanel = new RightPanel();
         rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
 
-        graphTextArea = new JTextArea("Upload a graph file",30, 50);
-        graphTextArea.setEditable(false);
-        leftPanel.add(graphTextArea);
 
         body.add(leftPanel);
         body.add(rightPanel);

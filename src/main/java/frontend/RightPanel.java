@@ -1,7 +1,5 @@
 package frontend;
 
-import com.sun.deploy.net.MessageHeader;
-
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import java.awt.*;
