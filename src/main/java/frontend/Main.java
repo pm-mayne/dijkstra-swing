@@ -1,7 +1,6 @@
 package frontend;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class Main {
 
@@ -15,7 +14,6 @@ public class Main {
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         body = new JPanel();
-
 
 
         leftPanel = new LeftPanel();
@@ -34,10 +32,6 @@ public class Main {
 
     public LeftPanel getLeftPanel() {
         return leftPanel;
-    }
-
-    public RightPanel getRightPanel() {
-        return rightPanel;
     }
 
     public void pack() {

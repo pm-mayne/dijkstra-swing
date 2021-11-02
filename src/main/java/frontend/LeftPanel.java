@@ -21,7 +21,7 @@ public class LeftPanel extends JPanel {
         labelPanel.add(new JLabel("Paste your graph structure here:"));
         this.add(labelPanel);
 
-        textPanel= new JPanel();
+        textPanel = new JPanel();
         graphTextArea = new JTextArea(getDefaultGraph(), 8, 30);
 
         separatorPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -72,10 +72,6 @@ public class LeftPanel extends JPanel {
 
     public JTextArea getGraphTextArea() {
         return graphTextArea;
-    }
-
-    public JRadioButton getCommaButton() {
-        return commaButton;
     }
 
     public JRadioButton getColonButton() {

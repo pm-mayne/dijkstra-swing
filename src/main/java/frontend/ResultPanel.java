@@ -4,8 +4,8 @@ import javax.swing.*;
 
 public class ResultPanel extends JPanel {
 
-    private JLabel resultLabel;
-    private Main parent;
+    private final JLabel resultLabel;
+    private final Main parent;
 
     public ResultPanel(Main parent) {
         this.parent = parent;
@@ -14,8 +14,8 @@ public class ResultPanel extends JPanel {
     }
 
 
-    public void updateMessage(String message, boolean isError){
-        if(isError){
+    public void updateMessage(String message, boolean isError) {
+        if (isError) {
             resultLabel.setText("<html><font color=red>" + message + "</color></html>");
         } else {
             resultLabel.setText("<html>The shortest path is: <font color=blue>" + message + "</color></html>");

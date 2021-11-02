@@ -124,20 +124,12 @@ public class RightPanel extends JPanel {
         return destinationSelector;
     }
 
-    public JRadioButton getDijkstraButton() {
-        return dijkstraButton;
-    }
-
     public JRadioButton getaStarButton() {
         return aStarButton;
     }
 
     public JRadioButton getBellmanButton() {
         return bellmanButton;
-    }
-
-    public JButton getSolveButton() {
-        return solveButton;
     }
 
     public ResultPanel getResultPanel() {

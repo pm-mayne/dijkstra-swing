@@ -13,7 +13,7 @@ import java.util.List;
 public class ParseController implements ActionListener {
     private final LeftPanel leftPanel;
     private final RightPanel rightPanel;
-    private Main parent;
+    private final Main parent;
 
     public ParseController(LeftPanel leftPanel, RightPanel rightPanel, Main parent) {
         this.leftPanel = leftPanel;

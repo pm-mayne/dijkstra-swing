@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 public class SolverAPI {
 
     public static Result solve(List<String> inputGraph, String sourceVertexName, String destinationVertexName, String separator, ALGORITHM algorithm) {
-        if(sourceVertexName.isEmpty() || destinationVertexName.isEmpty() || inputGraph.isEmpty() ||sourceVertexName.equals(destinationVertexName)){
+        if (sourceVertexName.isEmpty() || destinationVertexName.isEmpty() || inputGraph.isEmpty() || sourceVertexName.equals(destinationVertexName)) {
             return error("Input error");
         }
         switch (algorithm) {

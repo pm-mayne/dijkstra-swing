@@ -5,8 +5,6 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static javafx.scene.input.KeyCode.Q;
-
 public class Dijkstra implements Solver {
 
     private final Graph graph;
@@ -30,18 +28,6 @@ public class Dijkstra implements Solver {
                 .map(Edge::getWeight)
                 .max(Comparator.comparingInt(a -> a))
                 .orElse(0);
-    }
-
-    public Vertex getDestination() {
-        return destination;
-    }
-
-    public Vertex getSource() {
-        return source;
-    }
-
-    public Graph getGraph() {
-        return graph;
     }
 
     @Override
