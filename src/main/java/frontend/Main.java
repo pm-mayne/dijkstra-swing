@@ -1,12 +1,13 @@
 package frontend;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Main {
 
     private final JFrame window;
     private final JPanel body;
-    private final JPanel leftPanel;
+    private final LeftPanel leftPanel;
     private final RightPanel rightPanel;
 
     public Main() {
@@ -15,12 +16,13 @@ public class Main {
 
         body = new JPanel();
 
+
+
         leftPanel = new LeftPanel();
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
 
-        rightPanel = new RightPanel();
+        rightPanel = new RightPanel(this);
         rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
-
 
         body.add(leftPanel);
         body.add(rightPanel);
@@ -28,5 +30,17 @@ public class Main {
         window.add(body);
         window.pack();
         window.setVisible(true);
+    }
+
+    public LeftPanel getLeftPanel() {
+        return leftPanel;
+    }
+
+    public RightPanel getRightPanel() {
+        return rightPanel;
+    }
+
+    public void pack() {
+        window.pack();
     }
 }

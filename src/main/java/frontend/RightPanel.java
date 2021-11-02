@@ -1,5 +1,9 @@
 package frontend;
 
+import backend.controller.ParseController;
+import backend.controller.SolverController;
+import backend.model.api.ALGORITHM;
+
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import java.awt.*;
@@ -18,7 +22,17 @@ public class RightPanel extends JPanel {
     private final JButton parseButton2;
     private final JButton solveButton;
 
-    public RightPanel() {
+    private final ResultPanel resultPanel;
+
+    private final Main parent;
+
+    public RightPanel(Main parent) {
+        this.parent = parent;
+
+        resultPanel = new ResultPanel(parent);
+        resultPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        resultPanel.setVisible(false);
+
         sourceSelector = new JComboBox();
         destinationSelector = new JComboBox();
 
@@ -41,13 +55,13 @@ public class RightPanel extends JPanel {
         this.add(algorithmPanel);
 
         solveButton = new JButton("Solve");
-        solveButton.setEnabled(false);
         JPanel solvePanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        solvePanel.add(resultPanel);
         solvePanel.add(solveButton);
         this.add(solvePanel);
 
         this.setBorder(BorderFactory.createTitledBorder("Settings"));
-
+        addListeners();
     }
 
     private void setUpAlgorithm() {
@@ -61,19 +75,17 @@ public class RightPanel extends JPanel {
         group.add(bellmanButton);
         dijkstraButton.setSelected(true);
 
-        JPanel dijkstraPanel = new JPanel();
-        JPanel aStarPanel = new JPanel();
-        JPanel bellmanPanel = new JPanel();
-        dijkstraPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        aStarPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        bellmanPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        dijkstraPanel.add(dijkstraButton);
-        aStarPanel.add(aStarButton);
-        bellmanPanel.add(bellmanButton);
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
 
-        algorithmPanel.add(dijkstraPanel);
-        algorithmPanel.add(aStarPanel);
-        algorithmPanel.add(bellmanPanel);
+        JPanel buttonPanelContainer = new JPanel(new FlowLayout(FlowLayout.LEFT));
+
+        buttonPanel.add(dijkstraButton);
+        buttonPanel.add(aStarButton);
+        buttonPanel.add(bellmanButton);
+
+        buttonPanelContainer.add(buttonPanel);
+        algorithmPanel.add(buttonPanelContainer);
 
     }
 
@@ -96,5 +108,49 @@ public class RightPanel extends JPanel {
 
         sourcePanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
         destinationPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+    }
+
+    private void addListeners() {
+        parseButton.addActionListener(new ParseController(parent.getLeftPanel(), this, this.parent));
+        parseButton2.addActionListener(new ParseController(parent.getLeftPanel(), this, this.parent));
+        solveButton.addActionListener(new SolverController(parent.getLeftPanel(), this, getResultPanel()));
+    }
+
+    public JComboBox getSourceSelector() {
+        return sourceSelector;
+    }
+
+    public JComboBox getDestinationSelector() {
+        return destinationSelector;
+    }
+
+    public JRadioButton getDijkstraButton() {
+        return dijkstraButton;
+    }
+
+    public JRadioButton getaStarButton() {
+        return aStarButton;
+    }
+
+    public JRadioButton getBellmanButton() {
+        return bellmanButton;
+    }
+
+    public JButton getSolveButton() {
+        return solveButton;
+    }
+
+    public ResultPanel getResultPanel() {
+        return resultPanel;
+    }
+
+    public ALGORITHM getAlgorithm() {
+        ALGORITHM algo = ALGORITHM.DIJKSTRA;
+        if (getBellmanButton().isSelected()) {
+            algo = ALGORITHM.BELLMAN;
+        } else if (getaStarButton().isSelected()) {
+            algo = ALGORITHM.A_STAR;
+        }
+        return algo;
     }
 }

@@ -51,13 +51,13 @@ public class Dijkstra implements Solver {
             Vertex nearest = findNearest(vertices);
             vertices.remove(nearest);
             List<Vertex> neighboursOfNearest = getNeighboursOf(nearest);
-            for (Vertex v : neighboursOfNearest) {
-                updateDistances(nearest, v, getWeightOf(nearest, v));
+            for (Vertex neighbour : neighboursOfNearest) {
+                updateDistances(nearest, neighbour, getWeightOf(nearest, neighbour));
             }
         }
         List<Vertex> path = new ArrayList<>();
         Vertex curr = destination;
-        while(curr != null) {
+        while (curr != null) {
             path.add(curr);
             curr = predecessors.get(curr);
         }
@@ -75,9 +75,8 @@ public class Dijkstra implements Solver {
 
     private List<Vertex> getNeighboursOf(Vertex nearest) {
         return graph.getEdges().stream()
-                .filter(e -> e.getFrom() == nearest || e.getTo() == nearest)
+                .filter(e -> e.getFrom().equals(nearest) || e.getTo().equals(nearest))
                 .flatMap(e -> Stream.of(e.getFrom(), e.getTo()))
-                .filter(v -> v != nearest)
                 .collect(Collectors.toList());
     }
 
@@ -88,7 +87,7 @@ public class Dijkstra implements Solver {
     }
 
     private Vertex findNearest(List<Vertex> vertices) {
-        long min = upperBound;
+        long min = upperBound + 1;
         Vertex nearest = null;
         for (Vertex v : vertices) {
             if (distancesFromSource.get(v) < min) {

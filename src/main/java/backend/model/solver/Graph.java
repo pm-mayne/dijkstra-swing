@@ -24,4 +24,12 @@ public class Graph {
     public Set<Vertex> getVertices() {
         return vertices;
     }
+
+    @Override
+    public String toString() {
+        return "Graph{" +
+                "edges=" + edges +
+                ", vertices=" + vertices +
+                '}';
+    }
 }

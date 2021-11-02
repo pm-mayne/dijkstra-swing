@@ -10,7 +10,6 @@ public class LeftPanel extends JPanel {
 
     private final JPanel separatorPanel;
     private final JPanel textPanel;
-    private final JPanel labelPanel;
     private final JRadioButton commaButton;
     private final JRadioButton colonButton;
     private final JRadioButton semicolonButton;
@@ -18,12 +17,12 @@ public class LeftPanel extends JPanel {
 
     public LeftPanel() {
 
-        labelPanel= new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel labelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         labelPanel.add(new JLabel("Paste your graph structure here:"));
         this.add(labelPanel);
 
         textPanel= new JPanel();
-        graphTextArea = new JTextArea(getDefaultGraph(), 30, 30);
+        graphTextArea = new JTextArea(getDefaultGraph(), 8, 30);
 
         separatorPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         commaButton = new JRadioButton(" , ");
@@ -57,8 +56,8 @@ public class LeftPanel extends JPanel {
 
     private void initTextPanel() {
         textPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
-        graphTextArea.setEditable(false);
-        textPanel.add(graphTextArea);
+        JScrollPane scrollPane = new JScrollPane(graphTextArea);
+        textPanel.add(scrollPane);
         this.add(textPanel);
     }
 
@@ -69,5 +68,37 @@ public class LeftPanel extends JPanel {
                 "B,D,5" + "\n" +
                 "D,E,1" + "\n" +
                 "C,E,4";
+    }
+
+    public JTextArea getGraphTextArea() {
+        return graphTextArea;
+    }
+
+    public JRadioButton getCommaButton() {
+        return commaButton;
+    }
+
+    public JRadioButton getColonButton() {
+        return colonButton;
+    }
+
+    public JRadioButton getSemicolonButton() {
+        return semicolonButton;
+    }
+
+    public JRadioButton getSpaceButton() {
+        return spaceButton;
+    }
+
+    public String getSeparator() {
+        String separator = ",";
+        if (getSemicolonButton().isSelected()) {
+            separator = ";";
+        } else if (getColonButton().isSelected()) {
+            separator = ":";
+        } else if (getSpaceButton().isSelected()) {
+            separator = " ";
+        }
+        return separator;
     }
 }

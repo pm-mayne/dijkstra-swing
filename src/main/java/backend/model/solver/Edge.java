@@ -23,4 +23,13 @@ public class Edge {
     public int getWeight() {
         return weight;
     }
+
+    @Override
+    public String toString() {
+        return "Edge{" +
+                "from=" + from +
+                ", to=" + to +
+                ", weight=" + weight +
+                '}';
+    }
 }
